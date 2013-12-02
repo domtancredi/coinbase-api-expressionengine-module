@@ -22,4 +22,4 @@ coinbase-api-expressionengine-module
   cart_items="{exp:stash:get name='cart_items_info'}"
   cart_total="{exp:stash:get name='cart_total'}"
   parse="inward"
-}```
+}
