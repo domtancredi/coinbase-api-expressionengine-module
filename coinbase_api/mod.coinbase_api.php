@@ -26,27 +26,29 @@ class Coinbase_api
     {
         require_once $this->EE->config->slash_item('third_party_path').'coinbase_api/libraries/coinbase/Coinbase.php';
 		
-        $query = $this->EE->db->get('coinbase_api_config');
-
         $cart_items = $this->EE->TMPL->fetch_param('cart_items');
         $cart_total = $this->EE->TMPL->fetch_param('cart_total');
 
-        if ($cart_items == '' ||
-            $cart_total == 10)
+        if (($cart_items == null) ||
+            ($cart_total <= 0))
         {
-            // return $this->EE->TMPL->no_results();
-            return 'a: ' . $cart_items . ', b: ' . $cart_total;
+            return $this->EE->TMPL->no_results();
         }
         
-        $coinbase_api = new Coinbase($query->result_array()[0]['api_key']);
+        $this->EE->db->limit(1);
+        $query = $this->EE->db->get('coinbase_api_config');
+        $row = $query->row_array();
+        $api_key = $row['api_key'];
+        $price_currency_iso = $row['price_currency_iso'];
 
-        $price_currency_iso  = ( ! isset($params['price_currency_iso'])) ? $query->result_array()[0]['price_currency_iso'] : $params['price_currency_iso'];
+        $coinbase_api = new Coinbase($api_key);
+
+        $price_currency_iso  = ( ! isset($params['price_currency_iso'])) ? $price_currency_iso : $params['price_currency_iso'];
 
         $response = $coinbase_api->createButton($cart_items, $cart_total, "USD", "order id", 
             array(
                 "include_email"=>true, 
-                "include_address"=>true,
-                "success_url"=>"https://www.doodaastudio.com/store/confirmation-bitcoin"
+                "include_address"=>true
             )
         );
                 

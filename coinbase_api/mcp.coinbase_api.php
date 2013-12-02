@@ -45,14 +45,18 @@ class Coinbase_api_mcp {
             // We passed the test, onward!
             $this->_do_update_config();
         }
-
+        
+        $this->EE->db->limit(1);
         $query = $this->EE->db->get('coinbase_api_config');
-
+        $row = $query->row_array();
+        $api_key = $row['api_key'];
+        $price_currency_iso = $row['price_currency_iso'];
+        
         $data = array(
             'form_action'   => $this->_form_base,
             'form_hidden'   => FALSE,
-            'api_key'       => $query->result_array()[0]['api_key'],
-            'price_currency_iso' => $query->result_array()[0]['price_currency_iso']
+            'api_key'       => $api_key,
+            'price_currency_iso' => $price_currency_iso
         );
 
         return $this->EE->load->view('index', $data, TRUE);
