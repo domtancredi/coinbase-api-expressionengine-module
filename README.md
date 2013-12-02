@@ -1,7 +1,7 @@
 coinbase-api-expressionengine-module
 ====================================
 
-## Example using Stash module
+## Example (using Stash module with CartThrob fields):
 
 ```
 {exp:stash:set
