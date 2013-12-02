@@ -1,7 +1,7 @@
 coinbase-api-expressionengine-module
 ====================================
 
-## Example (using Stash module with CartThrob fields):
+## Example (using Stash module with CartThrob):
 
 ```
 {exp:stash:set
@@ -19,7 +19,7 @@ coinbase-api-expressionengine-module
 {/exp:stash:set}
 
 {exp:coinbase_api:display_buy_button
-  cart_items="{exp:stash:get name='cart_items_info'}"
-  cart_total="{exp:stash:get name='cart_total'}"
-  parse="inward"
+    cart_items="{exp:stash:get name='cart_items_info'}"
+    cart_total="{exp:stash:get name='cart_total'}"
+    parse="inward"
 }
