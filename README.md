@@ -23,3 +23,6 @@ coinbase-api-expressionengine-module
     cart_total="{exp:stash:get name='cart_total'}"
     parse="inward"
 }
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/domtancredi/coinbase-api-expressionengine-module/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
